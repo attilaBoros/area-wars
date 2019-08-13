@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
     <title>Area Wars</title>
 </head>
 <body>
-
+<div id="game-board" data-row-num="{{ row_num }}" data-col-num="{{ col_num }}">
+        {% for row in range(row_num) %}
+            <div>
+                {% for col in range(col_num) %}
+                    <div class="game-cell"
+                         data-coordinate-x="{{ col }}"
+                         data-coordinate-y="{{ row }}"></div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
