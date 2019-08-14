@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="static/style.css">
+    <script src="static/game.js" defer></script>
     <title>Area Wars</title>
 </head>
 <body>
     <h3>Area wars</h3>
     <div class="wrapper">
-    <div class="game-board" id="game-board" data-row-num="{{ row_num }}" data-col-num="{{ col_num }}">
-       {% for row in range(row_num) %}
-            <div>
-                {% for col in range(col_num) %}
-                    <div class="game-cell"
-                         data-coordinate-x="{{ col }}"
-                         data-coordinate-y="{{ row }}"></div>
-                {% endfor %}
-            </div>
-        {% endfor %} 
-    </div>
+        <div class="game-board" id="game-board" data-row-num="{{ row_num }}" data-col-num="{{ col_num }}">
+           {% for row in range(row_num) %}
+                <div>
+                    {% for col in range(col_num) %}
+                        <div class="game-cell"
+                             data-coordinate-x="{{ col }}"
+                             data-coordinate-y="{{ row }}"></div>
+                    {% endfor %}
+                </div>
+           {% endfor %}
+        </div>
     </div>
 </body>
 </html>
