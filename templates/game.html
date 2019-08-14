@@ -6,6 +6,8 @@
     <title>Area Wars</title>
 </head>
 <body>
+    <h3>Area wars</h3>
+    <div class="wrapper">
     <div class="game-board" id="game-board" data-row-num="{{ row_num }}" data-col-num="{{ col_num }}">
        {% for row in range(row_num) %}
             <div>
@@ -16,6 +18,7 @@
                 {% endfor %}
             </div>
         {% endfor %} 
+    </div>
     </div>
 </body>
 </html>
