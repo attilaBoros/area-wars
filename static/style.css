@@ -23,7 +23,7 @@ body {
     background-color: #9C1A1C;
 }
 
-.green-area {
+.blue-area {
     background-color: #11557C;
 }
 
@@ -34,4 +34,20 @@ body {
 h3 {
     font-family: fantasy;
     text-align: center;
+}
+
+.player1 {
+    background-color: green;
+}
+
+.player2 {
+    background-color: chocolate;
+}
+
+.red {
+    background-color: #9C1A1C
+}
+
+.blue {
+    background-color: #11557C;
 }
