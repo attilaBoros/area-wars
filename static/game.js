@@ -111,12 +111,14 @@ function canMove(direction, x, y) {
 
 
 function player1Collision() {
-    let player1 = document.querySelector('player1');
-    if (player1.classList.contains('blue')) {
-        return false;
-    } else {
-        return true;
-    }
+    let player1 = document.querySelector('.player1');
+    return !player1.classList.contains('blue');
+}
+
+
+function player2Collision() {
+    let player2 = document.querySelector('.player2');
+    return !player2.classList.contains('red')
 }
 
 
@@ -130,20 +132,6 @@ function main() {
 
     let set = setInterval(movePlayer1_, 200);
     let set2 = setInterval(movePlayer2_,200);
-
-    while (inGame) {
-
-       if (event.isComposing) {
-           clearInterval(set);
-       } else if (event2.isComposing) {
-          clearInterval(set2);
-       }
-       if (player1Collision() === false) {
-           break
-       }
-    }
-    set = null;
-    set2 = null;
 
 
 
