@@ -40,7 +40,7 @@ function movePlayer1_() {
     let player1 = document.querySelector(`.player1`);
     let x = player1.dataset.coordinateX;
     let y = player1.dataset.coordinateY;
-    if (player1Collision()) {
+    if (player1Collision() && player2Collision()) {
         if (direction1 === 'right') {
             player1.classList.add('red');
             player1.classList.remove('player1');
@@ -75,7 +75,7 @@ function movePlayer2_() {
     let player2 = document.querySelector(`.player2`);
     let x = player2.dataset.coordinateX;
     let y = player2.dataset.coordinateY;
-    if (player1Collision()) {
+    if (player1Collision() && player2Collision()) {
         if (direction2 === 'right') {
            player2.classList.add('blue');
            player2.classList.remove('player2');
@@ -138,7 +138,7 @@ function main() {
 
     let set = setInterval(movePlayer1_, 200);
     let set2 = setInterval(movePlayer2_,200);
-
+    console.log('hello');
 
 
 }
