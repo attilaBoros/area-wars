@@ -64,7 +64,11 @@ function movePlayer1_() {
     } else {
         clearInterval(set1);
         clearInterval(set2);
-
+        if (player1Collision() && player1HitWall()){
+            gameOver('Red');
+        } else {
+            gameOver('Blue');
+        }
     }
 }
 function movePlayer2_() {
@@ -90,21 +94,30 @@ function movePlayer2_() {
             document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) + 1}"]`).classList.add('player2');
         }
     } else {
+
         clearInterval(set1);
         clearInterval(set2);
+        if (player1Collision() && player1HitWall()){
+            gameOver('Red');
+        } else {
+            gameOver('Blue');
+        }
+
     }
 
 
 }
 function player1HitWall() {
     let player1 = document.querySelector('.player1');
-    return !(player1.dataset.coordinateX === '0' || player1.dataset.coordinateX === '129' || player1.dataset.coordinateY === '0' || player1.dataset.coordinateY === '69');
+    return !(player1.dataset.coordinateX === '0' || player1.dataset.coordinateX === '129' ||
+        player1.dataset.coordinateY === '0' || player1.dataset.coordinateY === '69');
 
 
 }
 function player2HitWall() {
     let player2 = document.querySelector('.player2');
-    return !(player2.dataset.coordinateX === '0' || player2.dataset.coordinateX === '129' || player2.dataset.coordinateY === '0' || player2.dataset.coordinateY === '69');
+    return !(player2.dataset.coordinateX === '0' || player2.dataset.coordinateX === '129' ||
+        player2.dataset.coordinateY === '0' || player2.dataset.coordinateY === '69');
 
 
 }
@@ -121,16 +134,19 @@ function player2Collision() {
 
 }
 
+function gameOver(player) {
+    let wrapper = document.querySelector('.wrapper');
+    wrapper.removeChild(document.querySelector('.game-board'));
+    let h1 = document.createElement('h1');
+    h1.textContent = `${player} Wins!!!!!!`;
+    wrapper.appendChild(h1);
+}
+
 function main() {
     document.querySelector('[data-coordinate-x="1"][data-coordinate-y="34"]').classList.add('player1');
     document.querySelector('[data-coordinate-x="128"][data-coordinate-y="34"]').classList.add('player2');
-    let event = window.addEventListener('keydown', setDirectionPlayer1);
-
-
-    let event2 = window.addEventListener('keydown', setDirectionPlayer2);
-    console.log('hello');
-
-
+    window.addEventListener('keydown', setDirectionPlayer1);
+    window.addEventListener('keydown', setDirectionPlayer2);
 }
 
 
