@@ -69,6 +69,7 @@ function movePlayer1_() {
     } else {
         return 0;
     }
+
 }
 function movePlayer2_() {
     let player2 = document.querySelector(`.player2`);
@@ -121,6 +122,12 @@ function player1Collision() {
 }
 
 
+function player2Collision() {
+    let player2 = document.querySelector('.player2');
+    return !player2.classList.contains('red')
+}
+
+
 function main() {
 
     document.querySelector('[data-coordinate-x="0"][data-coordinate-y="34"]').classList.add('player1');
@@ -131,6 +138,9 @@ function main() {
 
     let set = setInterval(movePlayer1_, 200);
     let set2 = setInterval(movePlayer2_,200);
+
+
+
 }
 
 
