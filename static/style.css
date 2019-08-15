@@ -13,20 +13,6 @@ body {
     display: inline-block;
 }
 
-.wall {
-    height: 2px;
-    width: 2px;
-    background-color: burlywood;
-}
-
-.red-area {
-    background-color: #9C1A1C;
-}
-
-.blue-area {
-    background-color: #11557C;
-}
-
 .wrapper {
     text-align: center;
 }
