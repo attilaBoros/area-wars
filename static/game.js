@@ -40,63 +40,68 @@ function movePlayer1_() {
     let player1 = document.querySelector(`.player1`);
     let x = player1.dataset.coordinateX;
     let y = player1.dataset.coordinateY;
-
-    if (direction1 === 'right') {
-       player1.classList.add('red');
-       player1.classList.remove('player1');
-       let cellCoordinates = [x, y];
-       redLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${parseInt(x) + 1}"][data-coordinate-y="${y}"]`).classList.add('player1');
-    } else if (direction1 === 'left') {
-       player1.classList.add('red');
-       player1.classList.remove('player1');
-       let cellCoordinates = [x, y];
-       redLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${parseInt(x) - 1}"][data-coordinate-y="${y}"]`).classList.add('player1');
-    } else if (direction1 === 'up') {
-       player1.classList.add('red');
-       player1.classList.remove('player1');
-       let cellCoordinates = [x, y];
-       redLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) - 1}"]`).classList.add('player1');
-    } else if (direction1 === 'down') {
-       player1.classList.add('red');
-       player1.classList.remove('player1');
-       let cellCoordinates = [x, y];
-       redLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) + 1}"]`).classList.add('player1');
+    if (player1Collision()) {
+        if (direction1 === 'right') {
+            player1.classList.add('red');
+            player1.classList.remove('player1');
+            let cellCoordinates = [x, y];
+            redLine.push(cellCoordinates);
+            document.querySelector(`[data-coordinate-x="${parseInt(x) + 1}"][data-coordinate-y="${y}"]`).classList.add('player1');
+        } else if (direction1 === 'left') {
+            player1.classList.add('red');
+            player1.classList.remove('player1');
+            let cellCoordinates = [x, y];
+            redLine.push(cellCoordinates);
+            document.querySelector(`[data-coordinate-x="${parseInt(x) - 1}"][data-coordinate-y="${y}"]`).classList.add('player1');
+        } else if (direction1 === 'up') {
+            player1.classList.add('red');
+            player1.classList.remove('player1');
+            let cellCoordinates = [x, y];
+            redLine.push(cellCoordinates);
+            document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) - 1}"]`).classList.add('player1');
+        } else if (direction1 === 'down') {
+            player1.classList.add('red');
+            player1.classList.remove('player1');
+            let cellCoordinates = [x, y];
+            redLine.push(cellCoordinates);
+            document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) + 1}"]`).classList.add('player1');
+        }
+    } else {
+        return 0;
     }
-
 }
 function movePlayer2_() {
     let player2 = document.querySelector(`.player2`);
     let x = player2.dataset.coordinateX;
     let y = player2.dataset.coordinateY;
-
-    if (direction2 === 'right') {
-       player2.classList.add('blue');
-       player2.classList.remove('player2');
-       let cellCoordinates = [x, y];
-       blueLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${parseInt(x) + 1}"][data-coordinate-y="${y}"]`).classList.add('player2');
-    } else if (direction2 === 'left') {
-       player2.classList.add('blue');
-       player2.classList.remove('player2');
-       let cellCoordinates = [x, y];
-       blueLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${parseInt(x) - 1}"][data-coordinate-y="${y}"]`).classList.add('player2');
-    } else if (direction2 === 'up') {
-       player2.classList.add('blue');
-       player2.classList.remove('player2');
-       let cellCoordinates = [x, y];
-       blueLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) - 1}"]`).classList.add('player2');
-    } else if (direction2 === 'down') {
-       player2.classList.add('blue');
-       player2.classList.remove('player2');
-       let cellCoordinates = [x, y];
-       blueLine.push(cellCoordinates);
-       document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) + 1}"]`).classList.add('player2');
+    if (player1Collision()) {
+        if (direction2 === 'right') {
+           player2.classList.add('blue');
+           player2.classList.remove('player2');
+           let cellCoordinates = [x, y];
+           blueLine.push(cellCoordinates);
+           document.querySelector(`[data-coordinate-x="${parseInt(x) + 1}"][data-coordinate-y="${y}"]`).classList.add('player2');
+        } else if (direction2 === 'left') {
+           player2.classList.add('blue');
+           player2.classList.remove('player2');
+           let cellCoordinates = [x, y];
+           blueLine.push(cellCoordinates);
+           document.querySelector(`[data-coordinate-x="${parseInt(x) - 1}"][data-coordinate-y="${y}"]`).classList.add('player2');
+        } else if (direction2 === 'up') {
+           player2.classList.add('blue');
+           player2.classList.remove('player2');
+           let cellCoordinates = [x, y];
+           blueLine.push(cellCoordinates);
+           document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) - 1}"]`).classList.add('player2');
+        } else if (direction2 === 'down') {
+           player2.classList.add('blue');
+           player2.classList.remove('player2');
+           let cellCoordinates = [x, y];
+           blueLine.push(cellCoordinates);
+           document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) + 1}"]`).classList.add('player2');
+        }
+    } else {
+        return 0;
     }
 }
 
@@ -111,12 +116,8 @@ function canMove(direction, x, y) {
 
 
 function player1Collision() {
-    let player1 = document.querySelector('player1');
-    if (player1.classList.contains('blue')) {
-        return false;
-    } else {
-        return true;
-    }
+    let player1 = document.querySelector('.player1');
+    return !player1.classList.contains('blue');
 }
 
 
@@ -126,27 +127,10 @@ function main() {
     document.querySelector('[data-coordinate-x="129"][data-coordinate-y="34"]').classList.add('player2');
     let event = window.addEventListener('keydown', setDirectionPlayer1);
     let event2 = window.addEventListener('keydown', setDirectionPlayer2);
-    let inGame = true;
+
 
     let set = setInterval(movePlayer1_, 200);
     let set2 = setInterval(movePlayer2_,200);
-
-    while (inGame) {
-
-       if (event.isComposing) {
-           clearInterval(set);
-       } else if (event2.isComposing) {
-          clearInterval(set2);
-       }
-       if (player1Collision() === false) {
-           break
-       }
-    }
-    set = null;
-    set2 = null;
-
-
-
 }
 
 
