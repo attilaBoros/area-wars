@@ -27,50 +27,63 @@ function setDirectionPlayer1(event) {
     }
 
 }
+
 function setDirectionPlayer2(event) {
     if (event.keyCode === up && direction1 !== 'down') {
         direction2 = 'up';
-    } else if (event.keyCode === down  && direction2 !== 'up') {
+    } else if (event.keyCode === down && direction2 !== 'up') {
         direction2 = 'down';
-    } else if (event.keyCode === left  && direction2 !== 'right') {
+    } else if (event.keyCode === left && direction2 !== 'right') {
         direction2 = 'left';
     } else if (event.keyCode === right && direction2 !== 'left') {
         direction2 = 'right'
     }
 
 }
+
+function findNextCell(direction, x, y) {
+    let nextCell;
+
+    if (direction === 'right') {
+        nextCell = document.querySelector(`[data-coordinate-x="${parseInt(x) + 1}"][data-coordinate-y="${y}"]`);
+    } else if (direction === 'left') {
+        nextCell = document.querySelector(`[data-coordinate-x="${parseInt(x) - 1}"][data-coordinate-y="${y}"]`);
+    } else if (direction === 'up') {
+        nextCell = document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) - 1}"]`);
+    } else if (direction === 'down') {
+        nextCell = document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) + 1}"]`);
+    }
+    return nextCell;
+}
+
+function endGame() {
+    clearInterval(set1);
+    clearInterval(set2);
+    if (player1Collision() && player1HitWall()) {
+        gameOver('Red');
+    } else {
+        gameOver('Blue');
+    }
+}
+
+function hasCollisions(){
+    return !player1Collision() || !player2Collision()
+}
+
 function movePlayer1_() {
     let player1 = document.querySelector(`.player1`);
     let x = player1.dataset.coordinateX;
     let y = player1.dataset.coordinateY;
-    if (player1Collision() && player2Collision() && player1HitWall() && player2HitWall()) {
-        if (direction1 === 'right') {
-            player1.classList.add('red');
-            player1.classList.remove('player1');
-            document.querySelector(`[data-coordinate-x="${parseInt(x) + 1}"][data-coordinate-y="${y}"]`).classList.add('player1');
-        } else if (direction1 === 'left') {
-            player1.classList.add('red');
-            player1.classList.remove('player1');
-            document.querySelector(`[data-coordinate-x="${parseInt(x) - 1}"][data-coordinate-y="${y}"]`).classList.add('player1');
-        } else if (direction1 === 'up') {
-            player1.classList.add('red');
-            player1.classList.remove('player1');
-            document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) - 1}"]`).classList.add('player1');
-        } else if (direction1 === 'down') {
-            player1.classList.add('red');
-            player1.classList.remove('player1');
-            document.querySelector(`[data-coordinate-x="${x}"][data-coordinate-y="${parseInt(y) + 1}"]`).classList.add('player1');
-        }
-    } else {
-        clearInterval(set1);
-        clearInterval(set2);
-        if (player1Collision() && player1HitWall()){
-            gameOver('Red');
-        } else {
-            gameOver('Blue');
-        }
+    if (hasCollisions() || !player1HitWall() || !player2HitWall()) {
+        endGame();
+        return;
     }
+    player1.classList.add('red');
+    player1.classList.remove('player1');
+
+    findNextCell(direction1, x, y).classList.add('player1');
 }
+
 function movePlayer2_() {
     let player2 = document.querySelector(`.player2`);
     let x = player2.dataset.coordinateX;
@@ -97,7 +110,7 @@ function movePlayer2_() {
 
         clearInterval(set1);
         clearInterval(set2);
-        if (player1Collision() && player1HitWall()){
+        if (player1Collision() && player1HitWall()) {
             gameOver('Red');
         } else {
             gameOver('Blue');
@@ -107,6 +120,7 @@ function movePlayer2_() {
 
 
 }
+
 function player1HitWall() {
     let player1 = document.querySelector('.player1');
     return !(player1.dataset.coordinateX === '0' || player1.dataset.coordinateX === '129' ||
@@ -114,6 +128,7 @@ function player1HitWall() {
 
 
 }
+
 function player2HitWall() {
     let player2 = document.querySelector('.player2');
     return !(player2.dataset.coordinateX === '0' || player2.dataset.coordinateX === '129' ||
@@ -121,12 +136,14 @@ function player2HitWall() {
 
 
 }
+
 function player1Collision() {
     let player1 = document.querySelector('.player1');
     return !player1.classList.contains('blue') && !player1.classList.contains('red');
 
 
 }
+
 function player2Collision() {
     let player2 = document.querySelector('.player2');
     return !player2.classList.contains('red') && !player2.classList.contains('blue');
@@ -148,7 +165,6 @@ function main() {
     window.addEventListener('keydown', setDirectionPlayer1);
     window.addEventListener('keydown', setDirectionPlayer2);
 }
-
 
 
 main();
