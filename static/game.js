@@ -10,8 +10,8 @@ const right = 39;
 let direction1 = 'right';
 let direction2 = 'left';
 
-let set1 = setInterval(movePlayer1_, 70);
-let set2 = setInterval(movePlayer2_,70);
+let set1 = setInterval(movePlayer1_, 45);
+let set2 = setInterval(movePlayer2_,45);
 
 function setDirectionPlayer1(event) {
     console.log(event.keyCode);
